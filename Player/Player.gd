@@ -26,7 +26,7 @@ func _physics_process(_delta):
 	position.y = wrapf(position.y, 0, Global.VP.y)
 
 	if Input.is_action_just_pressed("shoot"):
-		var Effects = get_node_or_null("/root/Game/Effects")
+		Effects = get_node_or_null("/root/Game/Effects")
 		if Effects != null:
 			var bullet = Bullet.instance()
 			bullet.global_position = global_position + nose.rotated(rotation)
@@ -50,6 +50,7 @@ func get_input():
 func damage(d):
 	health -= d
 	if health <= 0:
+		Global.update_lives(-1)
 		Effects = get_node_or_null("/root/Game/Effects")
 		if Effects != null:
 			var explosion = Explosion.instance()
